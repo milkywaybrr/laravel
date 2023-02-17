@@ -6,17 +6,34 @@
 @section('content')
 <!-- Main -->
 <div id="main">
-
+        @if($errors->any())
+            <div class="errors">
+                @foreach($errors->all() as $error)
+                    <p>
+                        {{ $error }}
+                    </p>
+                @endforeach
+            </div>
+        @endif
         <!-- Post -->
-            <article class="post">
+            <form method="post" enctype="multipart/form-data" action="{{ route('article.createPost') }}" class="post">
                 <h1>Add Post</h1>
-                <input type="text" name="name" placeholder="Post name"><br>
-                <input type="text" name="subtitle" placeholder="Subtitle"><br>
-                <input type="text" name="anons" placeholder="Anons"><br>
+                @csrf
+                <input type="text" name="title" placeholder="Title"><br>
+                <input type="text" name="anons_title" placeholder="Anons title"><br>
                 <textarea name="content" placeholder="Post content"></textarea><br>
                 <input type="file" name="file"><br><br>
+
+                <select name="category_id">
+                    @foreach($categories as $category)
+                        <option value="{{ $category['id'] }}">
+                            {{ $category['name'] }}
+                        </option>
+                    @endforeach
+                </select><br><br>
+
                 <input type="submit" class="button big fit" value="Add Post">
-            </article>
+            </form>
 
     </div>
 
