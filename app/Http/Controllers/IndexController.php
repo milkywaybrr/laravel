@@ -34,6 +34,16 @@ class IndexController extends Controller
         ]);
     }
 
+    public function update(Article $article)
+    {
+        $categories = Category::all();
+
+        return view('update', [
+            'categories' => $categories,
+            'article' => $article
+        ]);
+    }
+
     public function blocked()
     {
         return view('blocked');

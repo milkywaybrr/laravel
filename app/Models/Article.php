@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
 {
@@ -28,5 +29,11 @@ class Article extends Model
     public  function category()
     {
         return $this->hasOne(Category::class, 'id', 'category_id')->first();
+    }
+
+//    camelCase
+    public function getImageUrlAttribute()
+    {
+        return asset('public' . Storage::url($this->image_path));
     }
 }

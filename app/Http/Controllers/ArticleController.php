@@ -55,6 +55,8 @@ class ArticleController extends Controller
             return redirect()->route('home');
         }
 
+        $article->view_count +=1;
+        $article->save();
 
         return view('single', [
             'article' => $article
