@@ -34,8 +34,14 @@ class User extends Authenticatable
         'password'
     ];
 
+    public  function articles()
+    {
+        return $this->hasMany(Article::class, 'author_id', 'id')->get();
+    }
+
     public function getImageUrlAttribute()
     {
         return asset('public' . Storage::url($this->image_path));
     }
+
 }

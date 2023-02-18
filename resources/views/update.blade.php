@@ -21,7 +21,7 @@
                 @csrf
                 <input value="{{ $article->title }}" type="text" name="title" placeholder="Title"><br>
                 <input value="{{ $article->anons_title }}" type="text" name="anons_title" placeholder="Anons title"><br>
-                <textarea value="{{ $article->content }}" name="content" placeholder="Post content"></textarea><br>
+                <textarea name="content" placeholder="Post content">{{ $article->content }}</textarea><br>
 
                 <img height="480px"  width="100%" style="object-fit: contain" src="{{ $article->image_url }}" alt="">
 

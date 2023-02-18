@@ -16,11 +16,11 @@
                 </div>
                 <div class="meta">
                     <time class="published" datetime="2015-11-01">{{ $article['created_at']->format('d M Y') }}</time>
-                    <a href="#" class="author"><span class="name">{{ $article->author()->username }}</span><img src="{{ $article->author()->image_url }}" alt="" /></a>
+                    <a href="{{ route('user', $article->author_id) }}" class="author"><span class="name">{{ $article->author()->username }}</span><img src="{{ $article->author()->image_url }}" alt="" /></a>
                 </div>
             </header>
             <a href="#" class="image featured"><img src="{{ $article->image_url }}" alt="" /></a>
-            <p>{{ $article['content'] }}</p>
+            <p>{{ substr($article['content'], 0, 120) }}</p>
             <footer>
                 <ul class="actions">
                     <li><a href="{{ route('single', $article['id']) }}" class="button big">Continue Reading</a></li>

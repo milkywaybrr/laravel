@@ -28,9 +28,11 @@
                     <ul class="stats">
 
                         @auth
-                            <li><a href="#">Edit</a></li>
-                            <li><a href="#" class="red">Delete</a></li>
-                            <li><a href="#" class="red">Blocked</a></li>
+                            @if($article->user_has_actions)
+                                <li><a href="{{ route('article.update', $article) }}">Edit</a></li>
+                                <li><a href="{{ route('article.delete', $article) }}" class="red">Delete</a></li>
+                                <li><a href="{{ route('article.block', $article) }}" class="red">Blocked</a></li>
+                            @endif
                         @endauth
 
                         <li><a href="#" class="icon fa-eye">{{ $article->view_count }}</a></li>
@@ -51,27 +53,21 @@
                         </form>
                     @endauth
                 </section>
-                <article class="comment">
-                    <div class="comment-autor">
-                        <a href="#"><img src="public/images/avatar.jpg"></a>
-                        <a href="#">User</a>
-                    </div>
-                    <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat.</p>
-                </article>
-                <article class="comment">
-                    <div class="comment-autor">
-                        <a href="#"><img src="public/images/avatar.jpg"></a>
-                        <a href="#">User</a>
-                    </div>
-                    <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat.</p>
-                </article>
-                <article class="comment">
-                    <div class="comment-autor">
-                        <a href="#"><img src="public/images/avatar.jpg"></a>
-                        <a href="#">User</a>
-                    </div>
-                    <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat.</p>
-                </article>
+
+                @if(count($article->comments()))
+                    @foreach($article->comments() as $comment)
+                        <article class="comment">
+                        <div class="comment-autor">
+                            <a href="{{ route('user', $comment->user_id) }}"><img src="{{ $comment->user()->image_url }}"></a>
+                            <a href="{{ route('user', $comment->user_id) }}">{{ $comment->user()->username }}</a>
+                        </div>
+                        <p>{{ $comment->comment }}</p>
+                    </article>
+                    @endforeach
+
+                @else
+                    <h3>Комментариев пока нет</h3>
+                @endif
             </div>
 
     </div>

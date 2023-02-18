@@ -52,7 +52,7 @@
                    <section>
                         <ul class="links">
                             <li>
-                                <a href="#">
+                                <a href="{{ route('article.create') }}">
                                    <h3>Add Post</h3>
                                </a>
                             </li>
@@ -61,11 +61,18 @@
                                     <h3>Profile</h3>
                                 </a>
                             </li>
+                            @if(\Illuminate\Support\Facades\Auth::user()->role === 'admin')
+                            <li>
+                                <a href="">
+                                    <h3>Profile</h3>
+                                </a>
+                            </li>
+                            @endif
                             <li>
                                <a href="{{ route('logout') }}"><h3>Log Out</h3></a>
-            </li>
-            </ul>
-            </section>
+                            </li>
+                        </ul>
+                    </section>
         @endauth
 
 </section>

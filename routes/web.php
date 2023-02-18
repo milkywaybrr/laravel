@@ -29,7 +29,7 @@ Route::controller(IndexController::class)->group(function () {
 
     Route::get('/blocked', 'blocked')->name('blocked');
     Route::get('/single', 'single');
-    Route::get('/user', 'user');
+    Route::get('/users/{user:id}', 'user')->name('user');
 });
 
 //Route::middleware(['auth', AdminMiddleware::class])->controller(AdminController::class)->prefix('/admin')->group(function () {
@@ -38,6 +38,8 @@ Route::controller(IndexController::class)->group(function () {
 
 Route::post('/articles/create', [ArticleController::class, 'store'])->name('article.createPost');
 Route::post('/articles/{article:id}/update', [ArticleController::class, 'update'])->name('article.updatePost');
+Route::get('/articles/{article:id}/delete', [ArticleController::class, 'destroy'])->name('article.delete');
+Route::get('/articles/{article:id}/block', [ArticleController::class, 'setStatusBlocked'])->name('article.block');
 Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('single');
 
 Route::controller(AuthController::class)->group(function () {
